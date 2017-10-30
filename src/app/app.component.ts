@@ -8,7 +8,10 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  
+  public title:string = 'app';
+
+  public page: number = 0;
 
   users: Observable<any[]>;
 
