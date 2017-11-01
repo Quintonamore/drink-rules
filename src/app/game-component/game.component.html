@@ -1,1 +1,7 @@
-<h2>Game component</h2>
+<h2>Game component {{username}}</h2>
+
+<div *ngFor="let game of displayGames">
+    <div *ngFor="let gms of game.user.games">
+        {{gms.name}}    
+    </div>
+</div>

@@ -1,9 +1,3 @@
-<h1>Hi</h1>
+<h1>Drink Rules</h1>
 
-<ul>
-  <li class="text" *ngFor="let user of users | async">
-    {{user}}
-  </li>
-</ul>
-
-<game-component></game-component>
+<game-component *ngIf="page === 1" [username]="title"></game-component>

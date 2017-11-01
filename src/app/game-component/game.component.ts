@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { Component, Input } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+
+export interface Game { id: string, rule: string};
 
 /**
  * Game component that lists all of a users games that they have created.
@@ -11,9 +13,20 @@ import { Observable } from 'rxjs/Observable';
 })
 export class GameComponent {
 
-  games: any;
+  private games: AngularFirestoreCollection<Game>;
+
+  private game: Observable<Game[]>;
+
+  public displayGames: any;
+
+  @Input() username: string;
 
   constructor(db: AngularFirestore){
-    db.collection('users').valueChanges().subscribe(data => this.games = data);
+    this.games = db.collection<Game>('users');
+    this.game = this.games.valueChanges();
+    this.game.subscribe(data => {
+      console.log(data);
+      this.displayGames = data;
+    });
   }
 }

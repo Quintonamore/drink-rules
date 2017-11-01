@@ -11,11 +11,9 @@ export class AppComponent {
   
   public title:string = 'app';
 
-  public page: number = 0;
+  public page: number = 1;
 
-  users: Observable<any[]>;
-
-  constructor(db: AngularFirestore){
-    db.collection('users').valueChanges().subscribe(data => console.log(data));
+  constructor(){
+    
   }
 }
