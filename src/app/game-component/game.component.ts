@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 
-export interface Game { first_name: string, game_rules: Array<string>};
+export interface Game { quinton_teas: {first_name: string, game_rules: Array<string>}};
 
 /**
  * Game component that lists all of a users games that they have created.
@@ -26,7 +26,7 @@ export class GameComponent {
     this.game = this.games.valueChanges();
     this.game.subscribe(data => {
       console.log(data);
-      this.displayGames = data[0].first_name;
+      this.displayGames = data[0].quinton_teas.first_name;
     });
   }
 }
