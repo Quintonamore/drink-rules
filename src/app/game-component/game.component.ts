@@ -35,12 +35,32 @@ export class GameComponent implements OnInit{
   }
 
   ngOnInit() {
-    console.log(this.documentStr);
+    this.getUserInfo();
+  }
+
+  /**
+   * Method to set up the Game Component by getting the DB information
+   * 
+   * TODO: Seperate this DB stuff into an Angular Service
+   */
+  public getUserInfo() {
     let tst = this.datab.collection('users').doc(this.documentStr);
     this.user = tst.valueChanges();
     this.user.subscribe(data => {
       console.log(data);
       this.userInfo = data;
+      this.getGameNames(data);
     });
   }
+
+  /**
+   * Method to grab all of the list of games and game names from the Firebase DB
+   */
+  public getGameNames(data) {
+    let gameDocIds: Array<string> = [];
+    data.games.forEach(function(value){
+      gameDocIds.push(value.id);
+    });
+  }
+    
 }
