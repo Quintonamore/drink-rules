@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 export interface Game { name: string, games: Array<any>};
 
@@ -11,22 +12,41 @@ export interface Game { name: string, games: Array<any>};
   selector: 'game-component',
   templateUrl: './game.component.html'
 })
-export class GameComponent {
+export class GameComponent implements OnInit{
 
-  private games: AngularFirestoreCollection<Game>;
+  private games: AngularFirestoreDocument<{}>;
 
-  private game: Observable<Game[]>;
+  private userCollectionReference: AngularFirestoreCollection<any>;
+
+  private user: Observable<{}>;
 
   public displayGames: any;
+
+  // Angular Firestore db import
+  private datab: AngularFirestore;
+
+  @Input() documentStr: string;
 
   @Input() username: string;
 
   constructor(db: AngularFirestore){
-    this.games = db.collection<Game>('users');
-    this.game = this.games.valueChanges();
-    this.game.subscribe(data => {
+    // Assign the db from the constructor so that it can be used in ngOnInit
+    this.datab = db;
+    // this.userCollectionReference = db.collection<Game>('users');
+    // this.user = this.games.valueChanges();
+    // this.user.subscribe(data => {
+    //   console.log(data);
+    //   this.displayGames = data[0].name;
+    // });
+  }
+
+  ngOnInit() {
+    console.log(this.documentStr);
+    let tst = this.datab.collection('users').doc(this.documentStr);
+    this.user = tst.valueChanges();
+    this.user.subscribe(data => {
       console.log(data);
-      this.displayGames = data[0].name;
+      this.displayGames = data;
     });
   }
 }

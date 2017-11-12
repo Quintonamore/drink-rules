@@ -13,6 +13,8 @@ export class AppComponent {
 
   public page: number = 1;
 
+  public userDocString: string = 'eRdXuU2swHSyyM8B64zD';
+
   constructor(){
     
   }
