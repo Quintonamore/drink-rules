@@ -20,7 +20,7 @@ export class GameComponent implements OnInit{
 
   private user: Observable<{}>;
 
-  public displayGames: any;
+  public userInfo: any;
 
   // Angular Firestore db import
   private datab: AngularFirestore;
@@ -32,12 +32,6 @@ export class GameComponent implements OnInit{
   constructor(db: AngularFirestore){
     // Assign the db from the constructor so that it can be used in ngOnInit
     this.datab = db;
-    // this.userCollectionReference = db.collection<Game>('users');
-    // this.user = this.games.valueChanges();
-    // this.user.subscribe(data => {
-    //   console.log(data);
-    //   this.displayGames = data[0].name;
-    // });
   }
 
   ngOnInit() {
@@ -46,7 +40,7 @@ export class GameComponent implements OnInit{
     this.user = tst.valueChanges();
     this.user.subscribe(data => {
       console.log(data);
-      this.displayGames = data;
+      this.userInfo = data;
     });
   }
 }
