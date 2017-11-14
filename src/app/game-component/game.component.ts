@@ -22,6 +22,8 @@ export class GameComponent implements OnInit{
 
   public userInfo: any;
 
+  public gameDocs: Array<any> = [];
+
   // Angular Firestore db import
   private datab: AngularFirestore;
 
@@ -57,10 +59,18 @@ export class GameComponent implements OnInit{
    * Method to grab all of the list of games and game names from the Firebase DB
    */
   public getGameNames(data) {
-    let gameDocIds: Array<string> = [];
+    // Initialize helper db reference & temp array
+    let tst = this.datab.collection('games');
+    let tmp_array = this.gameDocs;
+
+    // Grab all of the ids and put them in a
     data.games.forEach(function(value){
-      gameDocIds.push(value.id);
+      tst.doc(value.id).valueChanges().subscribe(data => {
+        tmp_array.push(data);
+      });
     });
+
+    this.gameDocs = tmp_array;
   }
     
 }

@@ -1,3 +1,7 @@
 <h2>Game component {{username}}</h2>
 
 <span>Logged in as: {{userInfo.name}}</span>
+
+<ul>
+    <li *ngFor="let game of gameDocs">{{game.name}}</li>
+</ul>
