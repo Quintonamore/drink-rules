@@ -1,9 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
+import { DrinkingGameObj } from '../common/objects/drinkingGameObj'; // Unused for now
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
-
-export interface Game { name: string, games: Array<any>};
 
 /**
  * Game component that lists all of a users games that they have created.
@@ -20,7 +19,7 @@ export class GameComponent implements OnInit{
 
   private user: Observable<{}>;
 
-  public userInfo: any;
+  public userInfo: any = "";
 
   public gameDocs: Array<any> = [];
 
@@ -71,6 +70,14 @@ export class GameComponent implements OnInit{
     });
 
     this.gameDocs = tmp_array;
+  }
+
+  /**
+   * Method that opens
+   * @param game 
+   */
+  public openGameRulesPage(game){
+
   }
     
 }

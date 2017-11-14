@@ -6,6 +6,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { GameComponent } from './game-component';
+import { GetUserDataService } from './common/services/getUserData.service';
 
 import { AppComponent } from './app.component';
 
@@ -20,7 +21,7 @@ import { AppComponent } from './app.component';
     AngularFirestoreModule,
     AngularFireAuthModule
   ],
-  providers: [],
+  providers: [GetUserDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
