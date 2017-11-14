@@ -1,3 +1,3 @@
 <ul>
-    <li *ngFor="let game of gameDocs">{{game.name}}</li>
+    <li *ngFor="let game of gameDocs; let i = index" (click)="openGameRulesPage(i)">{{game.name}}</li>
 </ul>

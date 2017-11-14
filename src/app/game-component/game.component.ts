@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { DrinkingGameObj } from '../common/objects/drinkingGameObj'; // Unused for now
 
 /**
@@ -13,16 +13,19 @@ export class GameComponent {
   @Input()
   public gameDocs: Array<any> = [];
 
-  constructor(){
+  @Output()
+  public onOpenRules = new EventEmitter<number>();
+
+  constructor() {
 
   }
 
   /**
-   * Method that opens
-   * @param game 
+   * Emit the index which so the parent can open the corresponding rule-set.
+   * @param index
    */
-  public openGameRulesPage(game){
-
+  public openGameRulesPage(index) {
+    this.onOpenRules.emit(index);
   }
     
 }

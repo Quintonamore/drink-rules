@@ -1,3 +1,5 @@
 <h1>Drink Rules</h1>
 
-<game-component *ngIf="page === 1" [gameDocs]="gameDocs"></game-component>
+<game-component *ngIf="page === 1" [gameDocs]="gameDocs" (onOpenRules)="openRuleSet($event)"></game-component>
+
+<rules-component [gameObj]="rules"></rules-component>
