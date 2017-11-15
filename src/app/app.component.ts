@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { GetUserDataService } from './common/services/getUserData.service';
+import { LoginService } from './common/services/logInService.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent {
   
   public title:string = 'app';
 
-  public page: number = 1;
+  public page: number = 0;
 
   public userInfo: any = "";
 
@@ -20,10 +21,24 @@ export class AppComponent {
 
   public rules: any = "";
 
-  public userDocString: string = 'eRdXuU2swHSyyM8B64zD';
+  public userGoogleData: any = "";
 
-  constructor(private userDataService: GetUserDataService) {
-    this.getUserInfo();
+  public userDocString: string = '';
+
+  constructor(private userDataService: GetUserDataService,
+              private loginService: LoginService ) {
+
+    if (this.userDocString !== '') {
+      this.getUserInfo();
+    }
+
+    this.loginService.uidSubject.subscribe(data => {
+      if ( data === undefined ) {
+
+      } else {
+      this.finishLogin(data);
+      }
+    });
   }
 
   /**
@@ -62,7 +77,29 @@ export class AppComponent {
    * @param index 
    */
   public openRuleSet(index: number) {
-    this.page = 0;
+    this.page = 2;
     this.rules = this.gameDocs[index];
+  }
+
+  /**
+   * Calls the loginService to sign the user in and return the userDocString
+   */
+  public login() {
+    this.loginService.login();
+  }
+
+  public finishLogin(data) {
+    console.log(data);
+    this.userDocString = data.za.user.uid;
+    this.getUserInfo();
+    this.page = 1;
+  }
+
+  /**
+   * Logs the user out
+   */
+  public logout() {
+    this.loginService.logout();
+    this.page = 0;
   }
 }
