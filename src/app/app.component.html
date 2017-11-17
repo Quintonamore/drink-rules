@@ -4,6 +4,8 @@
 
 <rules-component *ngIf="page === 2" [gameObj]="rules" (onCloseRules)="closeRuleSet()"></rules-component>
 
+<input *ngIf="page === 1" #addgame (keyup.enter)="addGame(addgame.value)">
+
 <button (click)="login()" *ngIf="page === 0">Sign In</button>
 
 <button (click)="logout()" *ngIf="userDocString !== ''">Sign Out</button>

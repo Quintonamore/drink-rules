@@ -3,6 +3,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { GetUserDataService } from './common/services/getUserData.service';
 import { LoginService } from './common/services/logInService.service';
+import { NewDataService } from './common/services/newData.service';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,7 @@ export class AppComponent {
   public userDocString: string = '';
 
   constructor(private userDataService: GetUserDataService,
-    private loginService: LoginService ) {
+    private loginService: LoginService, private newDataService: NewDataService ) {
 
     // Check to see if the 
     this.loginService.isUserLoggedIn();
@@ -64,6 +65,15 @@ export class AppComponent {
     });
 
     this.gameDocs = tmp_array;
+  }
+
+  /**
+   * Add a game to the user that's logged in to the Firestore DB.
+   * Then redirect to that game rule page so they can start adding rules.
+   * @param gameName 
+   */
+  public addGame(gameName: string) {
+    this.newDataService.addGameToUser(this.userDocString, gameName);
   }
 
   /**
