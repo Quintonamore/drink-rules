@@ -3,3 +3,5 @@
 <ul>
     <li *ngFor="let rule of gameObj.rules">{{rule}}</li>
 </ul>
+
+<input #addrule placeholder="Add a rule" (keyup.enter)="addRule(addrule.value)">

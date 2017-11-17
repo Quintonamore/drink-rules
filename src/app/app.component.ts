@@ -16,15 +16,17 @@ export class AppComponent {
 
   public page: number = 0;
 
-  public userInfo: any = "";
+  public userInfo: any = '';
 
   public gameDocs: Array<any> = [];
 
-  public rules: any = "";
+  public rules: any = '';
 
-  public userGoogleData: any = "";
+  public userGoogleData: any = '';
 
   public userDocString: string = '';
+
+  public openGID: string = '';
 
   constructor(private userDataService: GetUserDataService,
     private loginService: LoginService, private newDataService: NewDataService ) {
@@ -61,10 +63,21 @@ export class AppComponent {
     this.userInfo.games.forEach(function(value){
       tmp_service.getGameData(value.id).subscribe(data => {
         tmp_array.push(data);
+        console.log("DATA ADDED", data);
       });
     });
 
     this.gameDocs = tmp_array;
+    console.log(this.userInfo);
+  }
+
+  /**
+   * This funciton will pop the last game added to the gameDocs array
+   * since it's not needed.
+   * @param event 
+   */
+  public newRuleHandler(event) {
+    this.gameDocs.pop();
   }
 
   /**
@@ -73,7 +86,7 @@ export class AppComponent {
    * @param gameName 
    */
   public addGame(gameName: string) {
-    this.newDataService.addGameToUser(this.userDocString, gameName);
+    this.newDataService.addGameToUser(this.userDocString, gameName, this.userInfo);
   }
 
   /**
@@ -83,6 +96,7 @@ export class AppComponent {
   public openRuleSet(index: number) {
     this.page = 2;
     this.rules = this.gameDocs[index];
+    this.openGID = this.userInfo.games[index];
   }
 
   /**
@@ -90,6 +104,8 @@ export class AppComponent {
    */
   public closeRuleSet() {
     this.page = 1;
+    this.openGID = '';
+    this.rules = '';
   }
 
   /**
@@ -109,7 +125,6 @@ export class AppComponent {
     if (data === null) {
       return;
     }
-    console.log(data);
     this.userDocString = data.uid;
     this.getUserInfo();
     this.page = 1;
