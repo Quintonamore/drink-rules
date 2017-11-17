@@ -9,7 +9,7 @@ export class LoginService {
 
     public userGoogleData: any;
 
-    public uidSubject: Subject<string>;
+    public uidSubject: Subject<any>;
 
     constructor(public auth: AngularFireAuth) {
         console.log("CREATING LOGIN SERVICE");
@@ -20,15 +20,21 @@ export class LoginService {
      * Login method, really just calls a new Google Auth Provider. And then determines whether its the user's first login
      */
     public login() {
-
-        this.auth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(this.completeLogin(this.userGoogleData));
-        this.uidSubject.next(this.userGoogleData);
-
+        return this.auth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(data => this.isUserLoggedIn());
     }
 
-    public completeLogin(userData): any {
-        this.userGoogleData = userData;
-        this.uidSubject.next(userData);
+    /**
+     * Returns the uid so that the application can get the user's info.
+     */
+    public getUserString(): string {
+        return this.auth.auth.currentUser.uid;
+    }
+
+    /**
+     * Finds out if there's a current user yet
+     */
+    public isUserLoggedIn() {
+        this.auth.authState.subscribe(data => this.uidSubject.next(data));
     }
 
     /**

@@ -2,8 +2,8 @@
 
 <game-component *ngIf="page === 1" [gameDocs]="gameDocs" (onOpenRules)="openRuleSet($event)"></game-component>
 
-<rules-component *ngIf="page === 2" [gameObj]="rules"></rules-component>
+<rules-component *ngIf="page === 2" [gameObj]="rules" (onCloseRules)="closeRuleSet()"></rules-component>
 
-<button (click)="login()">Sign In</button>
+<button (click)="login()" *ngIf="page === 0">Sign In</button>
 
-<button (click)="logout()">Sign Out</button>
+<button (click)="logout()" *ngIf="userDocString !== ''">Sign Out</button>

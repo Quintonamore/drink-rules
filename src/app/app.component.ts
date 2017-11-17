@@ -26,19 +26,13 @@ export class AppComponent {
   public userDocString: string = '';
 
   constructor(private userDataService: GetUserDataService,
-              private loginService: LoginService ) {
+    private loginService: LoginService ) {
 
-    if (this.userDocString !== '') {
-      this.getUserInfo();
-    }
+    // Check to see if the 
+    this.loginService.isUserLoggedIn();
 
-    this.loginService.uidSubject.subscribe(data => {
-      if ( data === undefined ) {
+    this.loginService.uidSubject.subscribe(data => this.finishLogIn(data));
 
-      } else {
-      this.finishLogin(data);
-      }
-    });
   }
 
   /**
@@ -82,15 +76,31 @@ export class AppComponent {
   }
 
   /**
+   * Closes the rule set and takes the user back to the game screen
+   */
+  public closeRuleSet() {
+    this.page = 1;
+  }
+
+  /**
    * Calls the loginService to sign the user in and return the userDocString
    */
   public login() {
     this.loginService.login();
   }
 
-  public finishLogin(data) {
+  /**
+   * This is called when the user is logged in, it sets up the app to get the uid and then get the user games
+   * @param data 
+   */
+  public finishLogIn(data) {
+
+    // If the data isn't there do nothing
+    if (data === null) {
+      return;
+    }
     console.log(data);
-    this.userDocString = data.za.user.uid;
+    this.userDocString = data.uid;
     this.getUserInfo();
     this.page = 1;
   }

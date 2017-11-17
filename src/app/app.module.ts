@@ -24,7 +24,7 @@ import { AppComponent } from './app.component';
     AngularFirestoreModule,
     AngularFireAuthModule
   ],
-  providers: [ GetUserDataService, LoginService],
+  providers: [ GetUserDataService, LoginService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
