@@ -55,20 +55,13 @@ export class AppComponent {
    * Sometime in the future it may not be realistic to grab ALL of the data.
    */
   public getGameInfo() {
-    // Temporary array and temp GetUserDataService for whatever reason (JS Closure?)
-    let tmp_service = this.userDataService;
-    let tmp_array = [];
 
     // Send a request for each game document the user has.
-    this.userInfo.games.forEach(function(value){
-      tmp_service.getGameData(value.id).subscribe(data => {
-        tmp_array.push(data);
-        console.log("DATA ADDED", data);
+    for(let i = 0; i < this.userInfo.games.length; i ++ ) {
+      this.userDataService.getGameData(this.userInfo.games[i].id).subscribe(data => {
+        this.gameDocs[i] = data;
       });
-    });
-
-    this.gameDocs = tmp_array;
-    console.log(this.userInfo);
+    }
   }
 
   /**
@@ -77,7 +70,7 @@ export class AppComponent {
    * @param event 
    */
   public newRuleHandler(event) {
-    this.gameDocs.pop();
+    
   }
 
   /**

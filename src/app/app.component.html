@@ -1,11 +1,22 @@
-<h1>Drink Rules</h1>
+<div class="body-div">
 
-<game-component *ngIf="page === 1" [gameDocs]="gameDocs" (onOpenRules)="openRuleSet($event)"></game-component>
+    <div class="header-div">
+        <h1>Drink Rules</h1>
+        <h1 class="logout" (click)="logout()" *ngIf="page !== 0">Sign Out</h1>
+    </div>
 
-<rules-component *ngIf="page === 2" [gameObj]="rules" [gid]="openGID.id" (onCloseRules)="closeRuleSet()" (newRule)="newRuleHandler()"></rules-component>
+    <game-component *ngIf="page === 1" [gameDocs]="gameDocs" (onOpenRules)="openRuleSet($event)"></game-component>
 
-<input *ngIf="page === 1" #addgame (keyup.enter)="addGame(addgame.value)">
+    <rules-component *ngIf="page === 2" [gameObj]="rules" [gid]="openGID.id" (onCloseRules)="closeRuleSet()" (newRule)="newRuleHandler()"></rules-component>
 
-<button (click)="login()" *ngIf="page === 0">Sign In</button>
+    <input *ngIf="page === 1" #addgame (keyup.enter)="addGame(addgame.value)">
 
-<button (click)="logout()" *ngIf="userDocString !== ''">Sign Out</button>
+    <h2 class="login-text" *ngIf="page === 0">
+        We remember your drinking game rules<br>so you don't have to
+    </h2>
+
+    <h2 class="login-btn" (click)="login()" *ngIf="page === 0">Sign In</h2>
+
+    
+
+</div>
