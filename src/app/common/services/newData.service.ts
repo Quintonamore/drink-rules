@@ -46,4 +46,13 @@ export class NewDataService {
 
     }
 
+    /**
+     * Makes a new user entry for the new user. This should only be run once for every new user.
+     * @param uid
+     */
+    public newUser(uid: string) {
+        let usersCollection = this.fireDB.collection('users');
+        usersCollection.doc(uid).set({games: []});
+    }
+
 }

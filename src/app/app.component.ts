@@ -11,8 +11,6 @@ import { NewDataService } from './common/services/newData.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  
-  public title:string = 'app';
 
   public page: number = 0;
 
@@ -45,7 +43,13 @@ export class AppComponent {
     this.userDataService.getUserInfo(this.userDocString).subscribe(data => {
       // Assign the data to userInfo and then call the GameInfo function since the user info is finished loading
       this.userInfo = data;
-      this.getGameInfo();
+
+      if ( this.userInfo ) {
+        this.getGameInfo();
+      } else {
+        // The user doesn't exist yet, so make it!
+        this.newDataService.newUser(this.userDocString);
+      }
     });
   }
 
@@ -62,15 +66,6 @@ export class AppComponent {
         this.gameDocs[i] = data;
       });
     }
-  }
-
-  /**
-   * This funciton will pop the last game added to the gameDocs array
-   * since it's not needed.
-   * @param event 
-   */
-  public newRuleHandler(event) {
-    
   }
 
   /**
