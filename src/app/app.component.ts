@@ -31,7 +31,7 @@ export class AppComponent {
   constructor(private userDataService: GetUserDataService,
     private loginService: LoginService, private newDataService: NewDataService ) {
 
-    // Check to see if the 
+    // Check to see if the user is already logged in.
     this.loginService.isUserLoggedIn();
 
     this.loginService.uidSubject.subscribe(data => this.finishLogIn(data));
