@@ -22,6 +22,8 @@ export class RulesComponent {
     @Output()
     public newRule = new EventEmitter<any>();
 
+    public gameMode: boolean = false;
+
     constructor(private newDataService: NewDataService ) {}
 
     /**
@@ -38,5 +40,12 @@ export class RulesComponent {
     public addRule(rule: string) {
         this.newDataService.addRuleToGame(this.gid, rule, this.gameObj);
         this.newRule.emit();
+    }
+
+    /**
+     * Sets the game mode to true to enter the game mode which starts to count drinks.
+     */
+    public toggleDrinkingGame() {
+        this.gameMode = !this.gameMode;
     }
 }
