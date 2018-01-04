@@ -110,6 +110,7 @@ export class AppComponent {
     this.page = 1;
     this.openGID = '';
     this.rules = '';
+    this.openGameIndex = -1;
   }
 
   /**
