@@ -55,4 +55,37 @@ export class NewDataService {
         usersCollection.doc(uid).set({games: []});
     }
 
+    /**
+     * Sends a request to firestore to remove the game document from the games collection
+     * and the user's games array.
+     * @param gid
+     * @param uid
+     * @param userData
+     */
+    public deleteGame(gid: string, uid: string, userData: any) {
+        // Send the delete function with the game id to delete the game document
+        this.fireDB.collection('games').doc(gid).delete();
+
+        // Update the userData to remove the referenced game, and then update firestore
+        for ( let i = 0; i < userData.games.length; i ++ ) {
+            if ( userData.games[i].id === gid ) {
+                userData.games.splice(i, 1);
+                break;
+            }
+        }
+
+        // Send the request with the updated userData
+        this.fireDB.collection('users').doc(uid).set(userData);
+    }
+
+    /**
+     * Sends a request to firestore to update the properties of a specific game.
+     * @param gid 
+     * @param gameData 
+     */
+    public updateGame(gid: string, gameData: any) {
+        // Send the request to update the specified game with an updated gameData
+        this.fireDB.collection('games').doc(gid).set(gameData);
+    }
+
 }

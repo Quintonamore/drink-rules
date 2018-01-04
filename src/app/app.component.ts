@@ -64,6 +64,7 @@ export class AppComponent {
     for(let i = 0; i < this.userInfo.games.length; i ++ ) {
       this.userDataService.getGameData(this.userInfo.games[i].id).subscribe(data => {
         this.gameDocs[i] = data;
+        console.log(data);
       });
     }
   }

@@ -1,9 +1,8 @@
 .rules-flex {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: left;
+    margin-left: 44%;
 }
 
 .list {
-    margin: 5px;
+
 }

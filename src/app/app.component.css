@@ -26,3 +26,7 @@ h1 {
     margin-top: 50px;
     cursor: pointer;
 }
+
+#addgame {
+    width: 300px;
+}

@@ -9,7 +9,7 @@
 
     <rules-component *ngIf="page === 2" [gameObj]="rules" [gid]="openGID.id" (onCloseRules)="closeRuleSet()"></rules-component>
 
-    <input *ngIf="page === 1" #addgame (keyup.enter)="addGame(addgame.value)">
+    <input *ngIf="page === 1" id="addgame" #addgame placeholder="Enter game name here to add a game!" (keyup.enter)="addGame(addgame.value)">
 
     <h2 class="login-text" *ngIf="page === 0">
         We remember your drinking game rules<br>so you don't have to
