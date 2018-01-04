@@ -21,7 +21,7 @@ export class RulesComponent {
     public onCloseRules = new EventEmitter<any>();
 
     @Output()
-    public newRule = new EventEmitter<any>();
+    public deleteGameId = new EventEmitter<any>();
 
     public gameMode: boolean = false;
 
@@ -40,7 +40,6 @@ export class RulesComponent {
      */
     public addRule(rule: string) {
         this.newDataService.addRuleToGame(this.gid, rule, this.gameObj);
-        this.newRule.emit();
     }
 
     /**
@@ -48,5 +47,12 @@ export class RulesComponent {
      */
     public toggleDrinkingGame() {
         this.gameMode = !this.gameMode;
+    }
+
+    /**
+     * Emits an event to the app component that a game has been deleted.
+     */
+    public deleteGame() {
+        this.deleteGameId.emit();
     }
 }

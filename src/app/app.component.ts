@@ -18,6 +18,8 @@ export class AppComponent {
 
   public gameDocs: Array<any> = [];
 
+  public gameSubs: Array<any> = [];
+
   public rules: any = '';
 
   public userGoogleData: any = '';
@@ -25,6 +27,8 @@ export class AppComponent {
   public userDocString: string = '';
 
   public openGID: string = '';
+
+  public openGameIndex: number;
 
   constructor(private userDataService: GetUserDataService,
     private loginService: LoginService, private newDataService: NewDataService ) {
@@ -62,9 +66,8 @@ export class AppComponent {
 
     // Send a request for each game document the user has.
     for(let i = 0; i < this.userInfo.games.length; i ++ ) {
-      this.userDataService.getGameData(this.userInfo.games[i].id).subscribe(data => {
+      this.gameSubs[i] = this.userDataService.getGameData(this.userInfo.games[i].id).subscribe(data => {
         this.gameDocs[i] = data;
-        console.log(data);
       });
     }
   }
@@ -79,13 +82,25 @@ export class AppComponent {
   }
 
   /**
+   * Takes in the gid and passes the event to the newDataService to delete the game.
+   * Also unsubscribes from the deleted game, and removed the index from the game docs as well.
+   */
+  public deleteGame() {
+    this.gameSubs[this.openGameIndex].unsubscribe();
+    this.gameDocs.splice(this.openGameIndex, 1);
+    this.newDataService.deleteGame(this.openGID, this.userDocString, this.userInfo);
+    this.closeRuleSet();
+  }
+
+  /**
    * Opens the certain ruleset for which game was selected by the user.
    * @param index 
    */
   public openRuleSet(index: number) {
     this.page = 2;
     this.rules = this.gameDocs[index];
-    this.openGID = this.userInfo.games[index];
+    this.openGID = this.userInfo.games[index].id;
+    this.openGameIndex = index;
   }
 
   /**

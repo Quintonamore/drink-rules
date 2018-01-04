@@ -7,7 +7,7 @@
 
     <game-component *ngIf="page === 1" [gameDocs]="gameDocs" (onOpenRules)="openRuleSet($event)"></game-component>
 
-    <rules-component *ngIf="page === 2" [gameObj]="rules" [gid]="openGID.id" (onCloseRules)="closeRuleSet()"></rules-component>
+    <rules-component *ngIf="page === 2" [gameObj]="rules" [gid]="openGID.id" (onCloseRules)="closeRuleSet()" (deleteGameId)="deleteGame()"></rules-component>
 
     <input *ngIf="page === 1" id="addgame" #addgame placeholder="Enter game name here to add a game!" (keyup.enter)="addGame(addgame.value)">
 
