@@ -1,0 +1,9 @@
+.rules-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.list {
+    margin: 5px;
+}

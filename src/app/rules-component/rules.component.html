@@ -1,7 +1,9 @@
-<button (click)="closeRulesPage()">Back</button>
+<div class="rules-flex">
+    <button (click)="closeRulesPage()">Back</button>
 
-<ul>
-    <li *ngFor="let rule of gameObj.rules">{{rule}}</li>
-</ul>
+    <ul>
+        <li class="list" *ngFor="let rule of gameObj.rules">{{rule}}</li>
+    </ul>
 
-<input #addrule placeholder="Add a rule" (keyup.enter)="addRule(addrule.value)">
+    <input #addrule placeholder="Add a rule" (keyup.enter)="addRule(addrule.value)">
+</div>

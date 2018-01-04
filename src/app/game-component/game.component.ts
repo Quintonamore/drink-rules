@@ -6,7 +6,8 @@ import { DrinkingGameObj } from '../common/objects/drinkingGameObj'; // Unused f
  */
 @Component({
   selector: 'game-component',
-  templateUrl: './game.component.html'
+  templateUrl: './game.component.html',
+  styleUrls: ['./game.component.css']
 })
 export class GameComponent {
 

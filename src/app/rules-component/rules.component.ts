@@ -6,7 +6,8 @@ import { NewDataService } from '../common/services/newData.service';
  */
 @Component({
     selector: 'rules-component',
-    templateUrl: './rules.component.html'
+    templateUrl: './rules.component.html',
+    styleUrls: ['./rules.component.css']
 })
 export class RulesComponent {
 

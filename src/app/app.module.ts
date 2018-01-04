@@ -21,7 +21,14 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp({
+      apiKey: "AIzaSyAsHZJdQUKgISTuZvvsb1NJIo-_1cnQIJw",
+      authDomain: "drinking-rules.firebaseapp.com",
+      databaseURL: "https://drinking-rules.firebaseio.com",
+      projectId: "drinking-rules",
+      storageBucket: "drinking-rules.appspot.com",
+      messagingSenderId: "678672580848"
+    }),
     AngularFirestoreModule,
     AngularFireAuthModule
   ],
