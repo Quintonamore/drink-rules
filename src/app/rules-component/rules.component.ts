@@ -25,6 +25,8 @@ export class RulesComponent {
 
     public gameMode: boolean = false;
 
+    public drinks: number;
+
     constructor(private newDataService: NewDataService ) {}
 
     /**
@@ -32,6 +34,7 @@ export class RulesComponent {
      */
     public closeRulesPage() {
         this.onCloseRules.emit();
+        this.drinks = 0;
     }
 
     /**
@@ -47,6 +50,7 @@ export class RulesComponent {
      */
     public toggleDrinkingGame() {
         this.gameMode = !this.gameMode;
+        this.drinks = 0;
     }
 
     /**
