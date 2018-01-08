@@ -54,6 +54,20 @@ export class RulesComponent {
     }
 
     /**
+     * Increments the drink counter by one!
+     */
+    public takeADrink() {
+        this.drinks += 1;
+    }
+
+    /**
+     * Maybe do something here, reserved for certain rules?
+     */
+    public finishDrink() {
+        // What do?
+    }
+
+    /**
      * Emits an event to the app component that a game has been deleted.
      */
     public deleteGame() {
